@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kendalikan Gula Darah – Lifestyle Sehat DM Tipe 2</title>
+<style>
+:root{
+  --bg:#FFF5F7; --surface:#FFFFFF; --ink:#3A1722; --muted:#7A5560; --line:#F0D4DB;
+  --accent:#C73F6C; --accent-ink:#FFFFFF; --accent-text:#B02F5B; --soft:#FBE3EA; --head:#FBE3EA;
+  --grad:linear-gradient(135deg,#C73F6C 0%,#A3306F 100%);
+  --warn:#9A4A0A; --warn-soft:#FFF0DC; --warn-bar:#E08A2E;
+  --ok:#1B7A43; --ok-soft:#DDF2E4; --bad:#B3261E; --bad-soft:#FDE4E2;
+  --veg:#5DB57A; --pro:#EDB84A; --carb:#C7B8E8; --plate-ink:#14213A;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#1B0F14; --surface:#251319; --ink:#F3E9EC; --muted:#BBA4AB; --line:#3C232B;
+    --accent:#C73F6C; --accent-ink:#FFFFFF; --accent-text:#F59AB3; --soft:#35192A; --head:#321820;
+    --grad:linear-gradient(135deg,#B3345F 0%,#8A2A68 100%);
+    --warn:#F0B27A; --warn-soft:#3A2412; --warn-bar:#E08A2E;
+    --ok:#7BD59B; --ok-soft:#173523; --bad:#FF9C94; --bad-soft:#40181A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1B0F14; --surface:#251319; --ink:#F3E9EC; --muted:#BBA4AB; --line:#3C232B;
+  --accent:#C73F6C; --accent-ink:#FFFFFF; --accent-text:#F59AB3; --soft:#35192A; --head:#321820;
+  --grad:linear-gradient(135deg,#B3345F 0%,#8A2A68 100%);
+  --warn:#F0B27A; --warn-soft:#3A2412; --warn-bar:#E08A2E;
+  --ok:#7BD59B; --ok-soft:#173523; --bad:#FF9C94; --bad-soft:#40181A;
+}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,h3{line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(1.7rem,7vw,2.4rem)}
+h2{font-size:1.45rem}
+h3{font-size:1.05rem}
+p{margin:0 0 .9em}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+
+.shell{max-width:780px;margin:0 auto;padding:0 16px 56px}
+header.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0 4px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700}
+.brand .logo{width:34px;height:34px;border-radius:11px;background:var(--grad);display:grid;place-items:center}
+.brand .logo svg{width:20px;height:20px}
+.themebtn{background:none;border:1.5px solid var(--line);border-radius:999px;padding:5px 14px;font-size:.85rem}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:10px 0;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex:none;background:none;border:0;border-radius:999px;padding:8px 15px;color:var(--ink)}
+nav.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);font-weight:700}
+
+section.page{display:none;padding-top:6px}
+section.page.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* hero */
+.hero{background:var(--grad);color:var(--accent-ink);border-radius:24px;padding:24px 22px;margin-bottom:14px;display:grid;gap:12px;grid-template-columns:1fr;align-items:center;position:relative;overflow:hidden}
+@media(min-width:560px){.hero{grid-template-columns:1.25fr .75fr}}
+.hero h1{margin-bottom:.3em}
+.hero p{margin-bottom:.7em}
+.hero small{display:block;opacity:.95;font-size:.82rem;line-height:1.6}
+.hero svg{width:100%;max-width:170px;justify-self:center}
+
+/* kartu target */
+.targets{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin-bottom:14px}
+@media(max-width:420px){.targets{grid-template-columns:1fr}}
+.target{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 14px;text-align:center}
+.target b{display:block;font-size:1.25rem;color:var(--accent-text)}
+.target span{font-size:.8rem;color:var(--muted)}
+
+.grid{display:grid;gap:12px;grid-template-columns:1fr 1fr;margin-bottom:14px}
+@media(max-width:380px){.grid{grid-template-columns:1fr}}
+.grid button{display:flex;gap:12px;align-items:center;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.grid .ic{flex:none;width:42px;height:42px;border-radius:12px;background:var(--soft);display:grid;place-items:center;font-size:1.3rem}
+.grid strong{display:block}
+.grid span.sub{color:var(--muted);font-size:.85rem}
+
+.week-mini{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.week-mini .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.bar{height:10px;background:var(--soft);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);border-radius:999px;transition:width .4s}
+
+.note{border-left:5px solid var(--warn-bar);background:var(--warn-soft);border-radius:12px;padding:14px 16px;margin:0 0 14px}
+.note.bad{border-left-color:var(--bad);background:var(--bad-soft)}
+.note strong:first-child{display:block;margin-bottom:3px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:14px}
+.card h3{margin-bottom:.45em}
+.card ul,.card ol{margin:0;padding-left:1.15em}
+.card li{margin-bottom:.4em}
+.card li:last-child{margin-bottom:0}
+.card p:last-child{margin-bottom:0}
+.cardhead{display:flex;gap:10px;align-items:center;margin-bottom:.6em}
+.cardhead .ic{flex:none;width:36px;height:36px;border-radius:11px;background:var(--soft);display:grid;place-items:center;font-size:1.1rem}
+.cardhead h3{margin:0}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:0}
+.kv dt{font-weight:700}
+.kv dd{margin:0;color:var(--muted)}
+
+/* Materi */
+.tiles{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.tile{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px}
+.tile .e{font-size:1.4rem;display:block;margin-bottom:2px}
+.tile b{display:block;font-size:.95rem}
+.tile span{color:var(--muted);font-size:.82rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 12px}
+.chip{border-radius:999px;padding:5px 12px;font-size:.88rem}
+.chip.g{background:var(--ok-soft);color:var(--ok)}
+.chip.r{background:var(--bad-soft);color:var(--bad)}
+.label{font-weight:700;font-size:.9rem;margin:6px 0 2px}
+.stats3{display:grid;gap:10px;grid-template-columns:repeat(3,1fr)}
+@media(max-width:420px){.stats3{grid-template-columns:1fr}}
+.stats3 div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stats3 b{display:block;font-size:1.4rem;color:var(--accent-text)}
+.stats3 span{font-size:.82rem;color:var(--muted)}
+.scale{display:flex;height:22px;border-radius:999px;overflow:hidden;margin:10px 0 4px}
+.scale i{display:block}
+.scale .s1{background:#D64545}.scale .s2{background:#E3A03A}.scale .s3{background:#3FA564}.scale .s4{background:#E3A03A}.scale .s5{background:#D64545}
+.scalelabel{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.chips.small .chip{padding:3px 10px;font-size:.82rem}
+
+/* Tips */
+.plate-wrap{display:grid;gap:14px;grid-template-columns:1fr;align-items:center}
+@media(min-width:560px){.plate-wrap{grid-template-columns:200px 1fr}}
+.plate-wrap svg{width:200px;max-width:100%;justify-self:center}
+.seg{cursor:pointer;stroke:var(--surface);stroke-width:3;transition:opacity .2s}
+.seg:hover{opacity:.85}
+.seg.on{stroke:var(--ink);stroke-width:3.5}
+.plate-info{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;min-height:96px}
+.plate-info b{display:block;margin-bottom:2px}
+.three{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin-bottom:12px}
+@media(max-width:420px){.three{grid-template-columns:1fr}}
+.three div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.three b{display:block;color:var(--accent-text)}
+.three span{font-size:.85rem;color:var(--muted)}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;position:relative;padding-left:40px;margin-bottom:10px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+.rule15{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin:10px 0 0}
+@media(max-width:480px){.rule15{grid-template-columns:1fr}}
+.rule15 div{background:rgba(255,255,255,.55);border-radius:12px;padding:10px 12px}
+:root[data-theme="dark"] .rule15 div{background:rgba(255,255,255,.08)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .rule15 div{background:rgba(255,255,255,.08)}}
+.rule15 b{display:block}
+
+/* Checklist */
+.lead{color:var(--muted);font-size:.9rem}
+.stat{color:var(--muted);font-size:.88rem;margin:6px 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px}
+th,td{border:1px solid var(--line);padding:8px;text-align:center}
+th{background:var(--head);font-size:.9rem}
+th:first-child,td:first-child{text-align:left;min-width:130px;position:sticky;left:0;background:var(--surface);z-index:1}
+th:first-child{background:var(--head)}
+td input[type=checkbox]{width:22px;height:22px;accent-color:var(--accent)}
+td input[type=number]{width:64px;text-align:center;padding:8px 4px;border-radius:8px;border:1px solid var(--line);background:var(--bg)}
+td input.ok{border-color:var(--ok);background:var(--ok-soft)}
+td input.mid{border-color:var(--warn-bar);background:var(--warn-soft)}
+td input.bad{border-color:var(--bad);background:var(--bad-soft)}
+.legend{font-size:.85rem;color:var(--muted);margin:10px 0 14px}
+.btn{background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:11px 20px;font-weight:700}
+.btn.ghost{background:none;border:1.5px solid var(--line);color:var(--ink)}
+.imt{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:8px 0}
+.imt label{display:flex;flex-direction:column;font-size:.85rem;color:var(--muted)}
+.imt input{width:120px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
+.result{padding:12px 16px;border-radius:12px;margin-top:10px;font-weight:700}
+.result.ok{background:var(--ok-soft);color:var(--ok)}
+.result.mid{background:var(--warn-soft);color:var(--warn)}
+.result.bad{background:var(--bad-soft);color:var(--bad)}
+
+/* Kuis */
+.dots{display:flex;gap:6px;margin-bottom:12px}
+.dots i{flex:1;height:6px;border-radius:999px;background:var(--line)}
+.dots i.on{background:var(--accent)}
+.dots i.ok{background:var(--ok)}
+.dots i.no{background:var(--bad)}
+.opt{display:block;width:100%;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default;color:inherit}
+.explain{color:var(--muted);margin:6px 0 14px}
+.badge{font-size:3.2rem;margin:0}
+.score{font-size:2.6rem;font-weight:700;color:var(--accent-text);margin:0}
+.q-meta{color:var(--muted);font-size:.88rem;margin-bottom:6px}
+
+ol.refs{list-style:none;margin:0 0 14px;padding:0;counter-reset:r}
+ol.refs li{counter-increment:r;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 14px 52px;margin-bottom:10px}
+ol.refs li::before{content:counter(r);position:absolute;left:14px;top:14px;width:26px;height:26px;border-radius:50%;background:var(--soft);color:var(--accent-text);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.tip{color:var(--muted);font-size:.88rem}
+/* Jadwal */
+.addrow{display:grid;gap:10px;grid-template-columns:1fr 110px auto}
+@media(max-width:480px){.addrow{grid-template-columns:1fr 110px}.addrow .btn{grid-column:1/-1}}
+.addrow input{width:100%;padding:11px 12px;border-radius:12px;border:1px solid var(--line);background:var(--bg)}
+.slot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin-bottom:10px}
+.slot.done{background:var(--ok-soft);border-color:var(--ok)}
+.slot .st{flex:none;width:96px;padding:8px;border-radius:10px;border:1px solid var(--line);background:var(--bg);font-weight:700}
+.slot .si{flex:1 1 150px;min-width:0}
+.slot .si b{display:block;overflow-wrap:anywhere}
+.slot .si .nt{color:var(--muted);font-size:.84rem}
+.slot .tk{flex:none;border:2px solid var(--accent);background:none;border-radius:999px;padding:7px 14px;font-weight:700;color:var(--accent-text);font-size:.88rem}
+.slot.done .tk{background:var(--ok);border-color:var(--ok);color:#fff}
+.slot .dl{flex:none;background:none;border:0;color:var(--muted);font-size:1.3rem;padding:2px 8px;line-height:1}
+.wplan{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.wplan div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
+.wplan div.today{border-color:var(--accent);background:var(--soft)}
+.wplan b{display:block;color:var(--accent-text)}
+.wplan span{font-size:.85rem;color:var(--muted)}
+.ctrl{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.ctrl .tp{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.ctrl .fr{color:var(--muted);font-size:.85rem}
+.ctrl input[type=date]{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+.cst{font-size:.8rem;font-weight:700;border-radius:999px;padding:2px 10px}
+.cst.ok{background:var(--ok-soft);color:var(--ok)}
+.cst.mid{background:var(--warn-soft);color:var(--warn)}
+.cst.bad{background:var(--bad-soft);color:var(--bad)}
+.cst.none{background:var(--soft);color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4C16 4 7 14 7 20a9 9 0 0 0 18 0C25 14 16 4 16 4Z"/><path d="M11 20h3l1.500-3 2 6 1.500-3h2"/></svg></span>
+      Kendalikan Gula Darah
+    </div>
+    <button class="themebtn" id="themeBtn" aria-label="Ganti tema terang atau gelap">Tema</button>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Menu utama">
+    <button role="tab" data-tab="beranda" aria-selected="true">Beranda</button>
+    <button role="tab" data-tab="materi" aria-selected="false">Materi</button>
+    <button role="tab" data-tab="tips" aria-selected="false">Tips</button>
+    <button role="tab" data-tab="jadwal" aria-selected="false">Jadwal</button>
+    <button role="tab" data-tab="checklist" aria-selected="false">Checklist</button>
+    <button role="tab" data-tab="kuis" aria-selected="false">Kuis</button>
+    <button role="tab" data-tab="referensi" aria-selected="false">Referensi</button>
+  </nav>
+
+  <main>
+    <!-- BERANDA -->
+    <section class="page active" id="beranda">
+      <div class="hero">
+        <div>
+          <h1>Kendalikan Gula Darah</h1>
+          <p>Panduan lifestyle sehat untuk pasien diabetes melitus tipe 2: atur makan, aktif bergerak, patuh pengobatan, dan pantau gula darahmu setiap hari.</p>
+          <small>Disusun oleh: Juwita Safitri<br>Mata kuliah: Praktik Teknologi Prosedur Keperawatan DM<br>Dosen: Ns. Novi Indriani, M.Tr.Kep</small>
+        </div>
+        <svg viewBox="0 0 170 170" role="img" aria-label="Ilustrasi tetes darah dan piring makan sehat">
+          <path d="M80 10C80 10 26 70 26 106a54 54 0 0 0 108 0C134 70 80 10 80 10Z" fill="#fff" opacity=".95"/>
+          <path d="M44 108h18l9-20 15 42 11-28h21" fill="none" stroke="#C73F6C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="130" cy="130" r="31" fill="#fff"/>
+          <path d="M130 102A28 28 0 0 0 130 158Z" fill="#5DB57A"/>
+          <path d="M130 130L130 102A28 28 0 0 1 158 130Z" fill="#EDB84A"/>
+          <path d="M130 130L158 130A28 28 0 0 1 130 158Z" fill="#C7B8E8"/>
+        </svg>
+      </div>
+
+      <div class="targets" aria-label="Target pengendalian gula darah">
+        <div class="target"><b>80–130</b><span>Gula darah puasa (mg/dL)</span></div>
+        <div class="target"><b>&lt; 180</b><span>2 jam setelah makan (mg/dL)</span></div>
+        <div class="target"><b>&lt; 7%</b><span>HbA1c (umumnya)</span></div>
+      </div>
+
+      <div class="grid">
+        <button data-go="materi"><span class="ic">📘</span><span><strong>Materi</strong><span class="sub">Kenali DM tipe 2</span></span></button>
+        <button data-go="tips"><span class="ic">💡</span><span><strong>Tips</strong><span class="sub">Self-management harian</span></span></button>
+        <button data-go="jadwal"><span class="ic">🗓️</span><span><strong>Jadwal</strong><span class="sub">Rutinitas harian dan kontrol</span></span></button>
+        <button data-go="checklist"><span class="ic">✅</span><span><strong>Checklist</strong><span class="sub">Pantau kebiasaan</span></span></button>
+        <button data-go="kuis"><span class="ic">🧠</span><span><strong>Kuis</strong><span class="sub">Uji pemahaman</span></span></button>
+        <button data-go="referensi"><span class="ic">🔗</span><span><strong>Referensi</strong><span class="sub">Sumber bacaan</span></span></button>
+      </div>
+
+      <div class="week-mini">
+        <div class="row"><strong>Kebiasaan sehat minggu ini</strong><span id="miniPct" style="color:var(--accent-text);font-weight:700">0%</span></div>
+        <div class="bar" aria-hidden="true"><i id="miniBar"></i></div>
+        <p class="tip" style="margin:8px 0 0" id="miniTxt"></p>
+      </div>
+
+      <div class="note"><strong>Catatan:</strong> Aplikasi ini hanya untuk edukasi dan tidak menggantikan saran dokter atau tenaga kesehatan.</div>
+    </section>
+
+    <!-- MATERI -->
+    <section class="page" id="materi">
+      <h2>Materi: lifestyle sehat pada pasien DM tipe 2</h2>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🩸</span><h3>Gambaran singkat DM tipe 2</h3></div>
+        <p>Diabetes melitus (DM) tipe 2 adalah kondisi saat tubuh tidak menggunakan insulin dengan baik dan/atau produksi insulin kurang, sehingga gula darah tinggi. Penyakit ini berlangsung seumur hidup dan dapat dikendalikan, terutama dengan gaya hidup sehat.</p>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🌱</span><h3>Apa itu lifestyle sehat dan mengapa penting?</h3></div>
+        <p>Lifestyle sehat adalah kebiasaan sehari-hari yang membantu mengendalikan gula darah: cara makan, aktivitas fisik, berat badan, tidur, stres, merokok, serta kepatuhan pemantauan dan pengobatan.</p>
+        <ul>
+          <li>Menjadi dasar penatalaksanaan DM tipe 2, bersama obat bila diperlukan</li>
+          <li>Membantu menurunkan gula darah, tekanan darah, dan kolesterol</li>
+          <li>Pada pasien dengan berat badan berlebih, penurunan berat badan sekitar 5–10% membantu memperbaiki kontrol gula darah</li>
+          <li>Menurunkan risiko komplikasi pada mata, ginjal, saraf, jantung, dan kaki</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🧩</span><h3>7 komponen lifestyle sehat</h3></div>
+        <div class="tiles">
+          <div class="tile"><span class="e">🥗</span><b>Pola makan</b><span>Teratur dan sesuai kebutuhan</span></div>
+          <div class="tile"><span class="e">🏃</span><b>Aktivitas fisik</b><span>Rutin dan terukur</span></div>
+          <div class="tile"><span class="e">⚖️</span><b>Berat badan ideal</b><span>Hindari kelebihan berat badan</span></div>
+          <div class="tile"><span class="e">🚭</span><b>Tanpa rokok</b><span>Batasi alkohol</span></div>
+          <div class="tile"><span class="e">😴</span><b>Tidur dan stres</b><span>7–8 jam, kelola stres</span></div>
+          <div class="tile"><span class="e">💊</span><b>Patuh obat</b><span>Pantau gula darah</span></div>
+          <div class="tile"><span class="e">🦶</span><b>Rawat kaki</b><span>Kontrol berkala</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🍽️</span><h3>Pola makan sehat</h3></div>
+        <p>Prinsip 3J: <strong>jadwal</strong> teratur, <strong>jumlah</strong> sesuai kebutuhan, <strong>jenis</strong> yang tepat. Model piringnya: ½ sayur, ¼ lauk, ¼ makanan pokok.</p>
+        <div class="label">Dianjurkan</div>
+        <div class="chips">
+          <span class="chip g">Sayur</span><span class="chip g">Buah utuh (porsi wajar)</span><span class="chip g">Nasi porsi terukur</span><span class="chip g">Ubi, jagung, oat</span><span class="chip g">Ikan</span><span class="chip g">Ayam tanpa kulit</span><span class="chip g">Tempe, tahu</span><span class="chip g">Air putih</span>
+        </div>
+        <div class="label">Dibatasi</div>
+        <div class="chips">
+          <span class="chip r">Minuman manis</span><span class="chip r">Kue manis</span><span class="chip r">Gorengan</span><span class="chip r">Makanan berlemak tinggi</span><span class="chip r">Makanan olahan</span><span class="chip r">Makanan asin</span>
+        </div>
+        <p class="tip" style="margin:0">Garam kurang dari 5 gram atau sekitar 1 sendok teh per hari.</p>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🏃</span><h3>Aktivitas fisik</h3></div>
+        <div class="stats3">
+          <div><b>150</b><span>menit per minggu, intensitas sedang</span></div>
+          <div><b>3–5</b><span>hari per minggu</span></div>
+          <div><b>2–3×</b><span>latihan kekuatan otot per minggu</span></div>
+        </div>
+        <ul style="margin-top:12px">
+          <li>Contoh: jalan cepat, senam, bersepeda</li>
+          <li>Kurangi duduk terlalu lama, selingi dengan bergerak ringan</li>
+          <li>Manfaat: otot lebih peka terhadap insulin sehingga gula darah lebih terkontrol</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🌙</span><h3>Kebiasaan lain yang mendukung</h3></div>
+        <ul>
+          <li><strong>Berhenti merokok:</strong> merokok memperberat risiko penyakit jantung dan pembuluh darah</li>
+          <li><strong>Tidur 7–8 jam dan kelola stres:</strong> stres dan kurang tidur dapat menaikkan gula darah</li>
+          <li><strong>Patuh obat dan pantau gula darah:</strong> jangan berhenti atau mengubah dosis sendiri</li>
+          <li><strong>Rawat kaki dan kontrol berkala:</strong> deteksi dini komplikasi, HbA1c umumnya tiap 3 bulan</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🎯</span><h3>Target yang ingin dicapai</h3></div>
+        <p class="tip">Gula darah puasa (mg/dL)</p>
+        <div class="scale" role="img" aria-label="Skala gula darah puasa: di bawah 70 rendah, 80 sampai 130 target, di atas 250 sangat tinggi">
+          <i class="s1" style="flex:30"></i><i class="s2" style="flex:10"></i><i class="s3" style="flex:50"></i><i class="s4" style="flex:120"></i><i class="s5" style="flex:50"></i>
+        </div>
+        <div class="scalelabel"><span>40</span><span>70</span><span>80</span><span>130</span><span>250</span><span>300</span></div>
+        <div class="chips small" style="margin-top:10px">
+          <span class="chip r">&lt; 70 rendah</span><span class="chip g">80–130 target</span><span class="chip r">≥ 250 sangat tinggi</span>
+        </div>
+        <dl class="kv">
+          <dt>2 jam setelah makan</dt><dd>&lt; 180 mg/dL</dd>
+          <dt>HbA1c</dt><dd>&lt; 7% (dapat berbeda per orang)</dd>
+          <dt>Tekanan darah</dt><dd>umumnya &lt; 130/80 mmHg</dd>
+        </dl>
+        <p class="tip" style="margin:10px 0 0">Target ditetapkan oleh dokter sesuai kondisi masing-masing pasien.</p>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">⚠️</span><h3>Gejala dan komplikasi bila tidak terkontrol</h3></div>
+        <div class="label">Gejala</div>
+        <div class="chips small">
+          <span class="chip r">Sering haus</span><span class="chip r">Sering buang air kecil</span><span class="chip r">Berat badan turun tanpa sebab</span><span class="chip r">Mudah lelah</span><span class="chip r">Luka sulit sembuh</span><span class="chip r">Kesemutan</span>
+        </div>
+        <p class="tip">Pada sebagian orang tidak bergejala.</p>
+        <div class="label">Komplikasi</div>
+        <div class="chips small">
+          <span class="chip r">Kerusakan mata</span><span class="chip r">Penyakit ginjal</span><span class="chip r">Gangguan saraf</span><span class="chip r">Serangan jantung dan stroke</span><span class="chip r">Luka kaki sulit sembuh</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIPS -->
+    <section class="page" id="tips">
+      <h2>Tips self-management</h2>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🍽️</span><h3>Atur makan: ketuk bagian piring</h3></div>
+        <div class="plate-wrap">
+          <svg viewBox="0 0 200 200" role="group" aria-label="Piring makan interaktif">
+            <circle cx="100" cy="100" r="97" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/>
+            <path class="seg" data-seg="veg" tabindex="0" role="button" aria-label="Sayur, setengah piring" d="M100 14A86 86 0 0 0 100 186Z" fill="var(--veg)"/>
+            <path class="seg" data-seg="pro" tabindex="0" role="button" aria-label="Lauk, seperempat piring" d="M100 100L100 14A86 86 0 0 1 186 100Z" fill="var(--pro)"/>
+            <path class="seg" data-seg="carb" tabindex="0" role="button" aria-label="Makanan pokok, seperempat piring" d="M100 100L186 100A86 86 0 0 1 100 186Z" fill="var(--carb)"/>
+            <g font-family="inherit" font-size="15" font-weight="700" fill="var(--plate-ink)" text-anchor="middle" pointer-events="none">
+              <text x="54" y="98">Sayur</text><text x="54" y="116" font-size="12">½ piring</text>
+              <text x="143" y="58">Lauk</text><text x="143" y="74" font-size="12">¼ piring</text>
+              <text x="143" y="140">Pokok</text><text x="143" y="156" font-size="12">¼ piring</text>
+            </g>
+          </svg>
+          <div class="plate-info" id="plateInfo" role="status"><b>Model piring 3J</b>Ketuk Sayur, Lauk, atau Pokok untuk melihat contoh pilihannya. Jadwal makan teratur (3 kali utama, 2–3 selingan) dan jumlah sesuai kebutuhan kalori, tanyakan dokter atau ahli gizi.</div>
+        </div>
+        <p class="tip" style="margin:10px 0 0">Hindari minuman manis, kurangi gorengan, makanan olahan, dan garam berlebih.</p>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">📅</span><h3>Prinsip 3J</h3></div>
+        <div class="three">
+          <div><b>Jadwal</b><span>Makan teratur, jangan lewatkan waktu makan</span></div>
+          <div><b>Jumlah</b><span>Sesuai kebutuhan kalori pribadi</span></div>
+          <div><b>Jenis</b><span>Pilih yang berserat, rendah gula dan lemak jenuh</span></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🏃</span><h3>Aktif bergerak</h3></div>
+        <ul>
+          <li>Sekitar 150 menit per minggu, 3–5 hari, jangan absen lebih dari 2 hari berturut-turut.</li>
+          <li>Pilih olahraga intensitas sedang: jalan cepat, senam, bersepeda.</li>
+          <li>Tambahkan latihan kekuatan otot 2–3 kali per minggu.</li>
+          <li>Bila gula darah sebelum olahraga di bawah 100 mg/dL, makan camilan karbohidrat dulu.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">💊</span><h3>Pantau dan patuh pengobatan</h3></div>
+        <ul>
+          <li>Minum obat atau suntik insulin sesuai anjuran, jangan berhenti sendiri walau gula darah sudah normal.</li>
+          <li>Ukur gula darah secara teratur dan catat hasilnya.</li>
+          <li>Kontrol rutin, termasuk HbA1c (umumnya tiap 3 bulan).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🦶</span><h3>Rawat kaki: 5 langkah setiap hari</h3></div>
+        <ol class="steps">
+          <li><strong>Periksa</strong> telapak dan sela jari, cari luka, lecet, atau kemerahan (pakai cermin bila perlu).</li>
+          <li><strong>Cuci</strong> dengan air hangat dan sabun lembut, lalu keringkan, terutama sela jari.</li>
+          <li><strong>Lembapkan</strong> kaki, tetapi jangan di sela jari.</li>
+          <li><strong>Potong kuku</strong> lurus, tidak terlalu pendek.</li>
+          <li><strong>Pakai alas kaki</strong> yang pas, jangan berjalan tanpa alas kaki.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🌙</span><h3>Kebiasaan sehat lain</h3></div>
+        <ul>
+          <li>Berhenti merokok dan batasi alkohol.</li>
+          <li>Jaga berat badan ideal, kelola stres, tidur 7–8 jam.</li>
+        </ul>
+      </div>
+
+      <div class="note"><strong>Kenali gula darah rendah (&lt; 70 mg/dL)</strong>Tanda: gemetar, keringat dingin, berdebar, pusing, lapar mendadak. Lakukan aturan 15 bila masih sadar:
+        <div class="rule15">
+          <div><b>1. Konsumsi</b>±15 gram gula cepat serap (3–4 sendok teh gula atau ½ gelas teh manis)</div>
+          <div><b>2. Tunggu</b>15 menit, lalu cek gula darah ulang</div>
+          <div><b>3. Ulangi</b>bila belum naik. Bila tidak sadar atau tidak membaik, cari bantuan medis</div>
+        </div>
+      </div>
+      <div class="note bad"><strong>Segera ke fasilitas kesehatan bila</strong>Pasien tidak sadar atau gula darah rendah tidak membaik, gula darah sangat tinggi disertai mual, muntah, sesak napas, atau sangat lemas, luka kaki memerah, bengkak, atau bernanah, serta nyeri dada atau lemah mendadak pada satu sisi tubuh.</div>
+    </section>
+
+    <!-- JADWAL -->
+    <section class="page" id="jadwal">
+      <h2>Jadwal sehat</h2>
+      <p class="lead">Contoh rutinitas sehari untuk pasien DM tipe 2. Ubah jam sesuai kebiasaanmu, lalu ketuk "Selesai" setiap kegiatan. Data tersimpan di perangkat.</p>
+
+      <div class="week-mini">
+        <div class="row"><strong>Kegiatan hari ini</strong><span id="dayPct" style="color:var(--accent-text);font-weight:700">0%</span></div>
+        <div class="bar" aria-hidden="true"><i id="dayBar"></i></div>
+        <p class="tip" style="margin:8px 0 0" id="dayTxt"></p>
+      </div>
+
+      <div id="dayList"></div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">➕</span><h3>Tambah kegiatan</h3></div>
+        <div class="addrow">
+          <input id="sName" type="text" maxlength="40" placeholder="Nama kegiatan" aria-label="Nama kegiatan">
+          <input id="sTime" type="time" value="09:00" aria-label="Jam kegiatan">
+          <button class="btn" id="sAdd">Tambah</button>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn ghost" id="sClear">Kosongkan centang hari ini</button>
+          <button class="btn ghost" id="sDefault">Kembalikan jadwal contoh</button>
+        </div>
+        <p class="tip" style="margin:10px 0 0">Jadwal obat, insulin, dan waktu makan disesuaikan dengan resep dan anjuran dokter atau ahli gizi.</p>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">🏃</span><h3>Rencana aktivitas fisik 1 minggu</h3></div>
+        <div class="wplan" id="wplan"></div>
+        <p class="tip" style="margin:10px 0 0">Contoh ini memenuhi sekitar 150 menit aerobik (5 hari × 30 menit) dan 2 kali latihan kekuatan per minggu. Sesuaikan dengan kondisi dan izin dokter.</p>
+      </div>
+
+      <div class="card">
+        <div class="cardhead"><span class="ic">📌</span><h3>Jadwal kontrol berkala</h3></div>
+        <p class="lead">Pilih tanggal kontrol berikutnya agar tidak terlewat. Frekuensi di bawah adalah gambaran umum dan dapat disesuaikan dokter.</p>
+        <div id="ctrlList"></div>
+      </div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section class="page" id="checklist">
+      <h2>Checklist pemantauan mingguan</h2>
+      <p class="lead">Centang kebiasaan sehat yang sudah kamu lakukan setiap hari dan isi gula darah puasa (contoh 110). Data tersimpan di perangkat.</p>
+      <div class="stat" id="stat"></div>
+      <div class="bar" aria-hidden="true" style="margin-bottom:14px"><i id="bar"></i></div>
+      <div class="tablewrap"><table id="tbl"></table></div>
+      <p class="legend">Gula darah puasa: <strong>hijau</strong> = 80–130 (sesuai target), <strong>oranye</strong> = di atas 130 atau 70–79, <strong>merah</strong> = di bawah 70 atau 250 ke atas (cari bantuan medis bila disertai gejala).</p>
+      <button class="btn ghost" id="reset">Atur ulang checklist</button>
+
+      <div class="card" style="margin-top:20px">
+        <div class="cardhead"><span class="ic">⚖️</span><h3>Hitung IMT (indeks massa tubuh)</h3></div>
+        <p class="lead">Memantau berat badan membantu mengendalikan gula darah. Hasil ini gambaran awal dan bukan diagnosis.</p>
+        <div class="imt">
+          <label>Berat badan (kg)<input id="bb" type="number" inputmode="decimal" min="20" max="300" placeholder="65"></label>
+          <label>Tinggi badan (cm)<input id="tb" type="number" inputmode="decimal" min="100" max="230" placeholder="160"></label>
+          <button class="btn" id="hitung">Hitung</button>
+        </div>
+        <div id="imtRes" role="status"></div>
+        <p class="tip" style="margin:10px 0 0">Kategori Asia-Pasifik: kurang &lt; 18,5; normal 18,5–22,9; berat badan lebih 23–24,9; obesitas ≥ 25.</p>
+      </div>
+    </section>
+
+    <!-- KUIS -->
+    <section class="page" id="kuis">
+      <h2>Evaluasi: kuis singkat</h2>
+      <div id="quizBox"></div>
+    </section>
+
+    <!-- REFERENSI -->
+    <section class="page" id="referensi">
+      <h2>Referensi</h2>
+      <ol class="refs">
+        <li>Perkumpulan Endokrinologi Indonesia (PERKENI). (2021). <em>Pedoman pengelolaan dan pencegahan diabetes melitus tipe 2 dewasa di Indonesia.</em> Jakarta: PB PERKENI.</li>
+        <li>American Diabetes Association. <em>Standards of care in diabetes</em> (edisi terbaru). <em>Diabetes Care.</em></li>
+        <li>International Diabetes Federation. <em>IDF Diabetes Atlas.</em> Brussels: IDF.</li>
+        <li>Kementerian Kesehatan Republik Indonesia. Materi edukasi diabetes melitus dan pedoman gizi seimbang (Isi Piringku). kemkes.go.id.</li>
+      </ol>
+    </section>
+  </main>
+</div>
+
+<script>
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+
+/* navigasi */
+const tabs = document.querySelectorAll('nav.tabs button');
+function go(id){
+  document.querySelectorAll('section.page').forEach(s => s.classList.toggle('active', s.id === id));
+  tabs.forEach(b => b.setAttribute('aria-selected', b.dataset.tab === id));
+  window.scrollTo({top:0});
+}
+tabs.forEach(b => b.addEventListener('click', () => go(b.dataset.tab)));
+document.querySelectorAll('[data-go]').forEach(b => b.addEventListener('click', () => go(b.dataset.go)));
+
+/* tema */
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+});
+
+/* piring interaktif */
+const plateText = {
+  veg: ['Sayur (½ piring)', 'Bayam, kangkung, brokoli, buncis, wortel, sawi. Pilih yang direbus, ditumis sedikit minyak, atau dikukus. Kaya serat sehingga kenyang lebih lama.'],
+  pro: ['Lauk (¼ piring)', 'Ikan, ayam tanpa kulit, telur, tempe, tahu. Pilih yang dipanggang, direbus, atau dikukus, kurangi digoreng dan berlemak tinggi.'],
+  carb: ['Makanan pokok (¼ piring)', 'Nasi dalam porsi terukur, ubi, jagung, oat. Pilih yang berserat dan jangan berlebihan. Buah utuh dalam porsi wajar dapat dilengkapi sebagai selingan.']
+};
+function showSeg(k){
+  document.querySelectorAll('.seg').forEach(s => s.classList.toggle('on', s.dataset.seg === k));
+  document.getElementById('plateInfo').innerHTML = '<b>' + plateText[k][0] + '</b>' + plateText[k][1];
+}
+document.querySelectorAll('.seg').forEach(s => {
+  s.addEventListener('click', () => showSeg(s.dataset.seg));
+  s.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); showSeg(s.dataset.seg); } });
+});
+
+/* checklist mingguan */
+const habits = [
+  'Minum obat / suntik insulin sesuai jadwal',
+  'Makan teratur (3J)',
+  'Batasi gula dan minuman manis',
+  'Olahraga 30 menit',
+  'Makan sayur dan buah',
+  'Periksa kaki',
+  'Tidur cukup (7–8 jam)'
+];
+const days = ['Sen','Sel','Rab','Kam','Jum','Sab','Min'];
+let data = store.get('kgd-week', null) || {c:{}, g:{}};
+function save(){ store.set('kgd-week', data); }
+function gClass(v){
+  if(!v) return '';
+  if(v < 70 || v >= 250) return 'bad';
+  if(v >= 80 && v <= 130) return 'ok';
+  return 'mid';
+}
+function renderTable(){
+  const t = document.getElementById('tbl');
+  let h = '<thead><tr><th>Kebiasaan</th>' + days.map(d => '<th>' + d + '</th>').join('') + '</tr></thead><tbody>';
+  habits.forEach((name, i) => {
+    h += '<tr><td>' + name + '</td>';
+    days.forEach((d, j) => {
+      const k = i + '-' + j;
+      h += '<td><input type="checkbox" data-k="' + k + '" aria-label="' + name + ', ' + d + '"' + (data.c[k] ? ' checked' : '') + '></td>';
+    });
+    h += '</tr>';
+  });
+  h += '<tr><td>Gula darah puasa (mg/dL)</td>';
+  days.forEach((d, j) => {
+    const v = data.g[j] || '';
+    h += '<td><input type="number" inputmode="numeric" min="20" max="600" placeholder="110" data-g="' + j + '" value="' + v + '" class="' + gClass(v) + '" aria-label="Gula darah puasa ' + d + '"></td>';
+  });
+  h += '</tr></tbody>';
+  t.innerHTML = h;
+  t.querySelectorAll('input[type=checkbox]').forEach(cb => cb.addEventListener('change', () => {
+    if(cb.checked) data.c[cb.dataset.k] = 1; else delete data.c[cb.dataset.k];
+    save(); updateStat();
+  }));
+  t.querySelectorAll('input[type=number]').forEach(inp => inp.addEventListener('input', () => {
+    const v = parseInt(inp.value, 10);
+    if(v) data.g[inp.dataset.g] = v; else delete data.g[inp.dataset.g];
+    inp.className = gClass(v);
+    save();
+  }));
+  updateStat();
+}
+function updateStat(){
+  const total = habits.length * days.length;
+  const n = Object.keys(data.c).length;
+  const pct = Math.round(n / total * 100);
+  document.getElementById('stat').textContent = n + ' dari ' + total + ' kebiasaan tercapai (' + pct + '%)';
+  document.getElementById('bar').style.width = pct + '%';
+  document.getElementById('miniPct').textContent = pct + '%';
+  document.getElementById('miniBar').style.width = pct + '%';
+  document.getElementById('miniTxt').textContent = n + ' dari ' + total + ' kebiasaan tercapai. Buka tab Checklist untuk mencentang.';
+}
+document.getElementById('reset').addEventListener('click', () => {
+  data = {c:{}, g:{}}; save(); renderTable();
+});
+
+/* IMT */
+document.getElementById('hitung').addEventListener('click', () => {
+  const bb = parseFloat(document.getElementById('bb').value);
+  const tb = parseFloat(document.getElementById('tb').value);
+  const out = document.getElementById('imtRes');
+  if(!bb || !tb || bb < 20 || bb > 300 || tb < 100 || tb > 230){
+    out.className = 'result mid'; out.textContent = 'Isi berat badan (kg) dan tinggi badan (cm) yang valid.'; return;
+  }
+  const m = tb / 100;
+  const imt = bb / (m * m);
+  let cls, cat;
+  if(imt < 18.5){ cls = 'mid'; cat = 'berat badan kurang'; }
+  else if(imt < 23){ cls = 'ok'; cat = 'normal'; }
+  else if(imt < 25){ cls = 'mid'; cat = 'berat badan lebih'; }
+  else { cls = 'bad'; cat = 'obesitas'; }
+  out.className = 'result ' + cls;
+  out.textContent = 'IMT ' + imt.toFixed(1).replace('.', ',') + ' kg/m² (' + cat + '). Konsultasikan target berat badan dengan dokter atau ahli gizi.';
+});
+
+/* kuis */
+const quiz = [
+  {q:'Manakah yang termasuk empat pilar penatalaksanaan DM tipe 2?', o:['Edukasi, terapi gizi, latihan jasmani, terapi obat','Obat, suplemen, tirah baring, diet ketat','Edukasi, operasi, diet cair, obat herbal','Latihan jasmani saja'], a:0, e:'Empat pilar: edukasi, terapi gizi medis, latihan jasmani, dan terapi farmakologis.'},
+  {q:'Prinsip "3J" dalam pengaturan makan pada pasien DM adalah…', o:['Jenis, jajan, jus','Jadwal, jumlah, jenis','Jam, jarak, jeda','Jumlah, jahe, jeruk'], a:1, e:'3J: jadwal makan teratur, jumlah sesuai kebutuhan, dan jenis makanan yang tepat.'},
+  {q:'Gula darah 62 mg/dL dengan tubuh gemetar dan keringat dingin. Pasien masih sadar. Tindakan pertama yang tepat adalah…', o:['Tidur dulu sampai membaik','Minum obat diabetes tambahan','Konsumsi sekitar 15 gram gula cepat serap, lalu cek ulang 15 menit','Berolahraga agar gula turun'], a:2, e:'Itu hipoglikemia. Beri gula cepat serap (sekitar 15 gram), cek ulang setelah 15 menit, dan ulangi bila perlu.'},
+  {q:'Aktivitas fisik yang dianjurkan untuk penderita DM tipe 2 adalah…', o:['Hanya saat gula darah tinggi','Sekitar 150 menit per minggu, intensitas sedang','Olahraga berat 1 kali sebulan','Tidak perlu, cukup minum obat'], a:1, e:'Sekitar 150 menit per minggu aktivitas aerobik intensitas sedang, dibagi 3–5 hari.'},
+  {q:'Perawatan kaki yang benar pada pasien DM adalah…', o:['Berjalan tanpa alas kaki agar sehat','Memeriksa kaki setiap hari dan selalu memakai alas kaki','Memotong kuku melengkung sependek mungkin','Mengabaikan luka kecil'], a:1, e:'Periksa kaki setiap hari, pakai alas kaki yang pas, dan segera tangani luka sekecil apa pun karena risiko infeksi tinggi.'},
+  {q:'Gejala khas yang sering muncul pada diabetes adalah…', o:['Sering haus, sering buang air kecil, dan berat badan turun tanpa sebab','Batuk lebih dari 2 minggu','Nyeri sendi saat pagi hari','Rambut rontok berat'], a:0, e:'Sering haus, sering buang air kecil, dan penurunan berat badan tanpa sebab adalah gejala khas, meski sebagian orang tidak bergejala.'},
+  {q:'Pemeriksaan HbA1c menggambarkan…', o:['Gula darah saat itu saja','Gula darah 1 jam setelah makan','Rata-rata kadar gula darah dalam sekitar 3 bulan terakhir','Fungsi ginjal'], a:2, e:'HbA1c mencerminkan rata-rata gula darah sekitar 3 bulan terakhir, sehingga dipakai untuk menilai pengendalian jangka panjang.'}
+];
+let qi = 0, score = 0, res = [];
+function renderQuiz(){
+  const box = document.getElementById('quizBox');
+  const dots = quiz.map((_, i) => '<i class="' + (i < res.length ? (res[i] ? 'ok' : 'no') : (i === qi ? 'on' : '')) + '"></i>').join('');
+  if(qi >= quiz.length){
+    let badge, title;
+    if(score >= 6){ badge = '🏅'; title = 'Pemahaman sangat baik'; }
+    else if(score >= 4){ badge = '👍'; title = 'Cukup baik'; }
+    else { badge = '📘'; title = 'Perlu belajar lagi'; }
+    box.innerHTML = '<div class="dots">' + dots + '</div><div class="card" style="text-align:center"><p class="badge">' + badge + '</p><h3>' + title + '</h3><p class="score">' + score + ' / ' + quiz.length + '</p><p>' + (score >= 6 ? 'Terus terapkan lifestyle sehat di rumah.' : 'Baca kembali materi dan tips, lalu coba lagi.') + '</p><button class="btn" id="again">Ulangi kuis</button> <button class="btn ghost" id="toMateri">Buka materi</button></div>';
+    document.getElementById('again').onclick = () => { qi = 0; score = 0; res = []; renderQuiz(); };
+    document.getElementById('toMateri').onclick = () => go('materi');
+    return;
+  }
+  const q = quiz[qi];
+  box.innerHTML = '<div class="dots">' + dots + '</div><div class="q-meta">Soal ' + (qi+1) + ' dari ' + quiz.length + '</div><h3>' + q.q + '</h3><div id="opts"></div><div id="fb"></div>';
+  const opts = box.querySelector('#opts');
+  q.o.forEach((t, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.textContent = t;
+    b.onclick = () => {
+      opts.querySelectorAll('button').forEach((x, j) => { x.disabled = true; if(j === q.a) x.classList.add('right'); });
+      const okAns = i === q.a;
+      if(okAns){ score++; } else { b.classList.add('wrong'); }
+      res.push(okAns);
+      const fb = box.querySelector('#fb');
+      fb.innerHTML = '<p class="explain"><strong>' + (okAns ? 'Benar. ' : 'Belum tepat. ') + '</strong>' + q.e + '</p><button class="btn" id="next">' + (qi === quiz.length-1 ? 'Lihat hasil' : 'Soal berikutnya') + '</button>';
+      fb.querySelector('#next').onclick = () => { qi++; renderQuiz(); };
+    };
+    opts.appendChild(b);
+  });
+}
+
+/* jadwal harian */
+const esc = t => String(t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function dkey(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+const todayKey = dkey(new Date());
+const defItems = () => [
+  {id:'s1', time:'06:00', name:'Bangun, cek gula darah puasa', note:'Catat hasilnya di tab Checklist', e:'🩸'},
+  {id:'s2', time:'07:00', name:'Sarapan teratur', note:'Obat diminum sesuai resep dokter', e:'🍳'},
+  {id:'s3', time:'10:00', name:'Selingan sehat', note:'Buah utuh porsi wajar atau kudapan rendah gula', e:'🍎'},
+  {id:'s4', time:'12:30', name:'Makan siang', note:'½ sayur, ¼ lauk, ¼ makanan pokok', e:'🍽️'},
+  {id:'s5', time:'16:00', name:'Aktivitas fisik 30 menit', note:'Jalan cepat, senam, atau bersepeda', e:'🏃'},
+  {id:'s6', time:'18:30', name:'Makan malam', note:'Porsi secukupnya, tidak terlalu larut', e:'🥗'},
+  {id:'s7', time:'20:00', name:'Periksa dan rawat kaki', note:'Cari luka, lecet, atau kemerahan', e:'🦶'},
+  {id:'s8', time:'21:30', name:'Relaksasi lalu tidur', note:'Targetkan tidur 7–8 jam', e:'😴'}
+];
+let sch = store.get('kgd-sched', null) || {items: defItems(), log: {}};
+function saveSch(){ store.set('kgd-sched', sch); }
+function renderDay(){
+  const box = document.getElementById('dayList');
+  const items = [...sch.items].sort((a,b) => a.time.localeCompare(b.time));
+  const done = sch.log[todayKey] || [];
+  if(!items.length){ box.innerHTML = '<p class="tip" style="text-align:center;padding:14px">Belum ada kegiatan. Tambahkan di bawah.</p>'; }
+  else {
+    box.innerHTML = items.map(it => {
+      const d = done.includes(it.id);
+      return '<div class="slot' + (d ? ' done' : '') + '"><input type="time" class="st" value="' + esc(it.time) + '" data-t="' + it.id + '" aria-label="Jam ' + esc(it.name) + '"><div class="si"><b>' + (it.e ? it.e + ' ' : '') + esc(it.name) + '</b>' + (it.note ? '<span class="nt">' + esc(it.note) + '</span>' : '') + '</div><button class="tk" data-k="' + it.id + '" aria-pressed="' + d + '">' + (d ? 'Selesai ✓' : 'Selesai') + '</button><button class="dl" data-d="' + it.id + '" aria-label="Hapus ' + esc(it.name) + '">×</button></div>';
+    }).join('');
+  }
+  box.querySelectorAll('.st').forEach(inp => inp.addEventListener('change', () => {
+    if(!inp.value) return;
+    const it = sch.items.find(x => x.id === inp.dataset.t);
+    if(it){ it.time = inp.value; saveSch(); renderDay(); }
+  }));
+  box.querySelectorAll('.tk').forEach(b => b.addEventListener('click', () => {
+    const cur = sch.log[todayKey] || [];
+    sch.log[todayKey] = cur.includes(b.dataset.k) ? cur.filter(x => x !== b.dataset.k) : [...cur, b.dataset.k];
+    saveSch(); renderDay();
+  }));
+  box.querySelectorAll('.dl').forEach(b => b.addEventListener('click', () => {
+    sch.items = sch.items.filter(x => x.id !== b.dataset.d);
+    saveSch(); renderDay();
+  }));
+  const total = sch.items.length;
+  const n = sch.items.filter(x => done.includes(x.id)).length;
+  const pct = total ? Math.round(n / total * 100) : 0;
+  document.getElementById('dayPct').textContent = pct + '%';
+  document.getElementById('dayBar').style.width = pct + '%';
+  document.getElementById('dayTxt').textContent = n + ' dari ' + total + ' kegiatan selesai hari ini.';
+}
+document.getElementById('sAdd').addEventListener('click', () => {
+  const name = document.getElementById('sName').value.trim();
+  const time = document.getElementById('sTime').value;
+  if(!name || !time || sch.items.length >= 20) return;
+  sch.items.push({id:'c' + Date.now(), time, name, note:'', e:'📝'});
+  document.getElementById('sName').value = '';
+  saveSch(); renderDay();
+});
+document.getElementById('sClear').addEventListener('click', () => { delete sch.log[todayKey]; saveSch(); renderDay(); });
+document.getElementById('sDefault').addEventListener('click', () => { sch = {items: defItems(), log: sch.log}; saveSch(); renderDay(); });
+
+/* rencana aktivitas 1 minggu */
+const plan = [
+  ['Senin','Jalan cepat 30 menit'],
+  ['Selasa','Latihan kekuatan otot 20–30 menit'],
+  ['Rabu','Jalan cepat 30 menit'],
+  ['Kamis','Latihan kekuatan otot 20–30 menit'],
+  ['Jumat','Bersepeda atau senam 30 menit'],
+  ['Sabtu','Jalan cepat 30 menit'],
+  ['Minggu','Jalan santai bersama keluarga 30 menit']
+];
+const todayIdx = (new Date().getDay() + 6) % 7;
+document.getElementById('wplan').innerHTML = plan.map((p, i) => '<div class="' + (i === todayIdx ? 'today' : '') + '"><b>' + p[0] + (i === todayIdx ? ' (hari ini)' : '') + '</b><span>' + p[1] + '</span></div>').join('');
+
+/* jadwal kontrol */
+const ctrlItems = [
+  ['a1c','HbA1c','Umumnya tiap 3 bulan'],
+  ['bp','Tekanan darah','Setiap kunjungan kontrol'],
+  ['eye','Pemeriksaan mata (retina)','Setahun sekali'],
+  ['kidney','Fungsi ginjal dan urin','Setahun sekali'],
+  ['lipid','Kolesterol (profil lemak)','Setahun sekali'],
+  ['foot','Pemeriksaan kaki oleh tenaga kesehatan','Minimal setahun sekali, periksa sendiri tiap hari']
+];
+let ctrl = store.get('kgd-ctrl', {});
+function ctrlStatus(v){
+  if(!v) return ['none','Belum diatur'];
+  const a = new Date(todayKey + 'T00:00:00'), b = new Date(v + 'T00:00:00');
+  const diff = Math.round((b - a) / 86400000);
+  if(diff < 0) return ['bad','Terlambat ' + (-diff) + ' hari'];
+  if(diff === 0) return ['mid','Hari ini'];
+  if(diff <= 14) return ['mid', diff + ' hari lagi'];
+  return ['ok', diff + ' hari lagi'];
+}
+function renderCtrl(){
+  const box = document.getElementById('ctrlList');
+  box.innerHTML = ctrlItems.map(c => {
+    const st = ctrlStatus(ctrl[c[0]]);
+    return '<div class="ctrl"><div class="tp"><b>' + c[1] + '</b><span class="cst ' + st[0] + '">' + st[1] + '</span></div><div class="fr">' + c[2] + '</div><label style="display:block;margin-top:8px;font-size:.85rem;color:var(--muted)">Kontrol berikutnya<br><input type="date" data-c="' + c[0] + '" value="' + (ctrl[c[0]] || '') + '"></label></div>';
+  }).join('');
+  box.querySelectorAll('input[type=date]').forEach(inp => inp.addEventListener('change', () => {
+    if(inp.value) ctrl[inp.dataset.c] = inp.value; else delete ctrl[inp.dataset.c];
+    store.set('kgd-ctrl', ctrl); renderCtrl();
+  }));
+}
+
+renderTable(); renderQuiz(); renderDay(); renderCtrl();
+</script>
+</body>
+</html>
